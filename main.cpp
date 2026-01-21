@@ -24,6 +24,12 @@ class code {
             }
         }
 
+        void readGuess() {
+            cout << "Enter guess: ";
+            for (int i = 0; i < n; i++) {
+                cin >> content[i];
+            }
+        }
         void print() const {
             for (int i = 0; i < n; i++) {
                 cout << content[i] << (i < n - 1 ? ", " : "");
@@ -46,6 +52,14 @@ int main() {
     code secretCode(n, m);
     secretCode.initializeRandom();
     secretCode.print();
+
+    cout << "Secret Code generated" << endl;
+
+
+    code guess(n, m);
+    guess.readGuess();
+    guess.print();
     return 0;
 
+    
 }
