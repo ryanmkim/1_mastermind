@@ -14,6 +14,12 @@ class code {
         code(int length, int range) {
             n = length;
             m = range;
-            content.resize(n)
+            content.resize(n);
         }
-}
+
+        void initializeRandom() {
+            for (int i = 0; i < n; i++) {
+                content[i] = rand() % m;
+            }
+        }
+};
