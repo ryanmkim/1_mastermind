@@ -1,8 +1,15 @@
+//the first include statement is assigned to a vector 
+//the statements below (the include statements) utilize the libaries 
+// to make the code function
 #include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+
+//this statement uses the namespace in order for library names such as 
+// cout, cin, for print statements to displays the outputs of the code
 using namespace std;
+
 
 class code {
 private:
