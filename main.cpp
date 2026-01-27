@@ -63,6 +63,14 @@ public:
         cout << endl;
     }
 
+    // function for the last requirement, where we have to test specific codes
+    // accepts a vector, and set it to the code
+    void setGuess(const vector<int>& digits) {
+        if (digits.size() == n) {
+            content = digits;
+        }
+    }
+
     // the statement returns the length of the code
     int length() const { return n; }
 
@@ -118,15 +126,11 @@ public:
     // the checkCorrect Function applies a similar foundation for the logic but except
     // the function is going to count how many digits match 
     int checkCorrect(const code& guess) const {
-        int i;
-        int k;
-        int correct;
-        for (i=0; i < n; i++) {
-            for (k=0; k < n; k++) {
-                if (digitAt(i) == guess.digitAt(k)) {
-                    correct++;
-                    break;
-                }
+        
+        int correct = 0;
+        for (int i=0; i < n; i++) {
+            if (digitAt(i) == guess.digitAt(i)) {
+                correct++;
             }
         }
         return correct;
@@ -136,35 +140,111 @@ public:
 
 };
 
+
+void parta() {
+    cout << "This is for the specific examples" << endl;
+    int n = 5;
+    int m = 7;
+
+    code secretCode(n, m);
+    secretCode.initializeRandom();
+
+    cout << "Secret Code: ";
+    secretCode.print();
+    cout << endl;
+
+    code guess1(n, m);
+    guess1.setGuess({5, 0, 3, 2, 6});
+    cout << "guess 1: ";
+    guess1.print();
+    cout << "Correct: " << secretCode.checkCorrect(guess1) << endl;
+    cout << "Incorrect: " << secretCode.checkIncorrect(guess1) << endl << endl;
+
+    code guess2(n, m);
+    guess2.setGuess({2, 1, 2, 2, 2});
+    cout << "Guess 2: ";
+    guess2.print();
+    cout << "Correct: " << secretCode.checkCorrect(guess2) << endl;
+    cout << "Incorrect: " << secretCode.checkIncorrect(guess2) << endl << endl;    
+
+    code guess3(n, m);
+    guess2.setGuess({1, 3, 3, 4, 5});
+    cout << "Guess 3: ";
+    guess2.print();
+    cout << "Correct: " << secretCode.checkCorrect(guess3) << endl;
+    cout << "Incorrect: " << secretCode.checkIncorrect(guess3) << endl << endl;     
+}
+
+
+
 // define main function
 int main() {
     // statement required to generate random values
     srand(time(0));
 
+    // parta();
+    // for part 2, of part a
+
     int n, m;
 
     // statement to ask user for the number of digits
+    // 5 for the specific testing values
     cout << "How many digits: ";
     cin >> n;
-    cout << endl;
 
     // statement to ask user for the digit range
+    // 10 for the specific testing values
     cout << "What's the range?: ";
     cin >> m;
-    cout << endl;
 
     // function to generate the secret code
     code secretCode(n, m);
     secretCode.initializeRandom();
     secretCode.print();
 
-    // statement to display that the Secret Code has been generated
-    cout << "Secret Code generated" << endl;
+    // lets user know that secret code was generated
+    cout << "Secret Code generated, you have 10 tries to guess" << endl;
 
-    // the statements read and prints the user's guess
-    code guess(n, m);
-    guess.readGuess();
-    guess.print();
+    // initialize the maximum number of attempts
+    int maxG = 10;
+    // create a boolean to check if the player has won the game
+    bool won = false;
+
+    // starts loop, max of how many attempts
+    for (int i = 1; i <= maxG; i++) {
+        // displays current round number
+        cout << "Round " << i << " of" << maxG << " " << "\n";
+        
+         // create a new code object to store user's input
+        code guess(n, m);
+        // calls the readGuess function to input the user's code
+        guess.readGuess();
+
+        // tracks how many digits are in the exact correct positios
+        int correctLoc = secretCode.checkCorrect(guess);
+        // tracks how many digits are the correct number but in the wrong position
+        int incorrectLoc = secretCode.checkIncorrect(guess);
+
+        // check if the number of correctly placed digits equals the total length
+        // thus, the codebreaker correctly guessed the code
+        if (correctLoc == n) {
+            // prints that the codebreaker won
+            cout << "\n codebreaker wins" << endl;
+            cout << "You guessed the code in " << i << " tries." << endl;
+            won = true;
+            // updates the boolean that user won
+            break;
+        } else { // otherwise, tels user how many are in correct location or incorrect location
+            cout << correctLoc << " correct location, " << incorrectLoc << " incorrect location." << endl << endl;
+        }
+    }
+
+    // after loop, check if user failed
+    if (!won) { // thus, codemaker wins
+        cout << "codemaker wins" << endl;
+        cout << "The correct code was: ";
+        secretCode.print(); // show user what the code was
+    }
 
     return 0;
 }
