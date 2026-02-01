@@ -140,31 +140,65 @@ public:
 
 };
 
+class response {
+private:
+    int numCorrect;
+    int numIncorrect;
+
+public:
+    response(int c = 0, int i = 0) {
+        numCorrect = c;
+        numIncorrect = i;
+    }
+
+    int getCorrect() const {
+        return numCorrect;
+    }
+
+    int getIncorrect() const {
+        return numIncorrect;
+    }
+
+    void setCorrect(int c) {
+        numCorrect = c;
+    }
+
+    void setIncorrect(int i) {
+        numIncorrect = i;
+    }
+};
+
+bool operator==(const response& r1, const response& r2) {
+    bool sameCorrect = false;
+    bool sameIncorrect = false;
+
+    if (r1.getCorrect() == r2.getCorrect()) {
+        sameCorrect = true;
+    }
+
+    if (r1.getIncorrect() == r2.getIncorrect()) {
+        sameIncorrect = true;
+    }
+
+    if (sameCorrect && sameIncorrect) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+ostream& operator<<(ostream& out, const response& r) {
+    out << r.getCorrect();
+    out << " correct location, ";
+    out << r.getIncorrect();
+    out << " incorrect location";
+    return out;
+}
+
+
 
 
 // part b: 
-
-
-class response {
-    private:
-        int numCorrect;
-        int numIncorrect;
-
-    public:
-        response(int correct = 0, int incorrect = 0) {
-            numCorrect = correct;
-            numIncorrect = incorrect;
-        }
-
-        int getCorrect() const { return numCorrect; }
-        int getIncorrect() const { return numIncorrect; }
-        void setCorrect(int c) { numCorrect = c; }
-        void setIncorrect(int i) { numIncorrect = i; }
-
-
-        // Person 2 finishes here
-        // operators
-};
 
 
 class mastermind {
@@ -213,8 +247,4 @@ int main() {
     srand(time(0));
     int n, m;
     return 0;
-
-
-    // Person 4 finishes here
-    // for example, validate inputs, get inputs, etc
 }
