@@ -37,31 +37,40 @@ response mastermind::getResponse(const code& guess)
     return response(correct, incorrect);
 }
 
+// Determines whether the most recent response indicates the code is solved.
+// Take a response object "r" and returns a boolean depending on if the user guessed correctly.
 bool mastermind::isSolved(const response& r) 
 {
+	// The game is solved when every position is correct.
     if (r.getCorrect() == secretCode.length()) {
         return true;
     }
+
     return false;
 }
 
+// Runs one full game of Mastermind with up to 10 guesses.
 void mastermind::playGame() 
 {
-    /*cout << "Please enter the length of the number you would like to guess, "
-            "then enter the maximum digit you would like the digits of the number"
-            "to be set to."<< endl;
-    cin >> n;
-    cin >> m;*/
+	// Initialize the secret code for a new game.
     secretCode.initializeRandom();
+
+	// For testing and grading. Prints the secret code to the user.
     printSecretCode();
-    response Response;
+
+	// Run up to 10 rounds of guessing.
     for (int i = 0; i < 10; i++) {
-        Response = getResponse(humanGuess());
-        cout << Response <<endl;
-        if (isSolved(Response)) {
+		// Get the human's guess, evaluate it, and print the response.
+        response r = getResponse(humanGuess());
+        cout << r <<endl;
+
+		// Check for a win after each guess
+        if (isSolved(r)) {
             cout << "You win!" <<endl;
             return;
         }
     }
-    cout<<"You lost"<<endl;
+
+	// If the loop is exited, the player did not solve the code in 10 tries.
+    cout << "You lost" << endl;
 }

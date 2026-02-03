@@ -19,7 +19,7 @@
   <component name="ChangeListManager">
     <list default="true" id="16e8e787-e093-43ce-93fc-83da2bb6441b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mastermind.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/mastermind.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +75,8 @@
       <workItem from="1769234018789" duration="3186000" />
       <workItem from="1769272254596" duration="2078000" />
       <workItem from="1769280525506" duration="16000" />
-      <workItem from="1770009815485" duration="3438000" />
+      <workItem from="1770009815485" duration="3615000" />
+      <workItem from="1770158579876" duration="1594000" />
     </task>
     <servers />
   </component>
